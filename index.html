@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Bull | Окрыляет!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #060614;
+            --secondary: #0f0f2a;
+            --redbull-blue: #0054a6;
+            --redbull-yellow: #ffde00;
+            --redbull-red: #dc0032;
+            --redbull-silver: #e5e5e5;
+            --text: #ffffff;
+            --text-light: #b8c2d1;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --gradient: linear-gradient(135deg, #0054a6, #dc0032, #ffde00);
+        }
+
+        body {
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 84, 166, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(220, 0, 50, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 50% 50%, rgba(255, 222, 0, 0.1) 0%, transparent 30%);
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+        }
+
+        .floating-can {
+            position: absolute;
+            width: 80px;
+            height: 160px;
+            background: linear-gradient(135deg, var(--redbull-blue), var(--redbull-red));
+            border-radius: 8px 8px 20px 20px;
+            animation: float 15s infinite ease-in-out;
+            opacity: 0.7;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .floating-can::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            width: 60px;
+            height: 15px;
+            background: var(--redbull-silver);
+            border-radius: 3px;
+        }
+
+        .floating-can::after {
+            content: 'RED BULL';
+            position: absolute;
+            bottom: 40px;
+            color: white;
+            font-size: 8px;
+            letter-spacing: 1px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, 50px) rotate(5deg); }
+            50% { transform: translate(-40px, 70px) rotate(-5deg); }
+            75% { transform: translate(50px, -30px) rotate(3deg); }
+        }
+
+        nav {
+            background-color: rgba(15, 15, 42, 0.95);
+            backdrop-filter: blur(15px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid var(--redbull-blue);
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--redbull-yellow), var(--redbull-red));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            letter-spacing: 2px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(220, 0, 50, 0.3);
+        }
+
+        .logo i {
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 15px rgba(220, 0, 50, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gradient);
+            transition: var(--transition);
+            border-radius: 3px;
+        }
+
+        .nav-links a:hover {
+            color: var(--redbull-yellow);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            max-width: 1300px;
+            margin: 100px auto 0;
+            padding: 2rem;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--redbull-yellow), var(--redbull-red));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(220, 0, 50, 0.3);
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 5px;
+            background: var(--gradient);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(220, 0, 50, 0.5);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin: 2.5rem 0 1.5rem;
+            color: var(--redbull-yellow);
+            position: relative;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 3px;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin: 1.8rem 0 1rem;
+            color: var(--redbull-silver);
+        }
+
+        p {
+            margin-bottom: 1.8rem;
+            font-size: 1.15rem;
+            text-align: justify;
+        }
+
+        .section {
+            margin-bottom: 3.5rem;
+            padding: 2.5rem;
+            background: linear-gradient(145deg, rgba(15, 15, 42, 0.9), rgba(6, 6, 20, 0.95));
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 84, 166, 0.3);
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 84, 166, 0.1), transparent);
+            transition: var(--transition);
+        }
+
+        .section:hover::before {
+            left: 100%;
+        }
+
+        .section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            border-color: var(--redbull-blue);
+        }
+
+        ul, ol {
+            margin-left: 2.5rem;
+            margin-bottom: 1.8rem;
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            color: var(--redbull-yellow);
+        }
+
+        blockquote {
+            border-left: 5px solid var(--redbull-blue);
+            padding: 1.5rem 2rem;
+            margin: 2.5rem 0;
+            font-style: italic;
+            position: relative;
+            background: rgba(0, 84, 166, 0.1);
+            border-radius: 0 10px 10px 0;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        blockquote::before {
+            content: '"';
+            font-size: 5rem;
+            color: var(--redbull-blue);
+            opacity: 0.3;
+            position: absolute;
+            top: -20px;
+            left: 10px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .product-card {
+            background: linear-gradient(145deg, rgba(25, 25, 55, 0.9), rgba(15, 15, 42, 0.95));
+            border-radius: 12px;
+            padding: 1.8rem;
+            transition: var(--transition);
+            border: 2px solid rgba(0, 84, 166, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+            border-color: var(--redbull-blue);
+        }
+
+        .product-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: var(--redbull-yellow);
+        }
+
+        .product-card p {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, rgba(15, 15, 42, 0.9), rgba(6, 6, 20, 0.95));
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(0, 84, 166, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 84, 166, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(255, 222, 0, 0.5); }
+            to { text-shadow: 0 0 20px rgba(220, 0, 50, 0.7); }
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            position: relative;
+            z-index: 1;
+            color: var(--text-light);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 20px rgba(0, 84, 166, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid transparent;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 25px rgba(220, 0, 50, 0.6);
+            border-color: var(--redbull-yellow);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: linear-gradient(145deg, rgba(25, 25, 55, 0.9), rgba(15, 15, 42, 0.95));
+            border-radius: 15px;
+            transition: var(--transition);
+            border: 2px solid rgba(0, 84, 166, 0.3);
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+            border-color: var(--redbull-blue);
+        }
+
+        .feature i {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .feature h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--redbull-yellow);
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            height: 250px;
+            border: 2px solid rgba(0, 84, 166, 0.3);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border-color: var(--redbull-blue);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .event-section {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .event-image {
+            width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            transition: var(--transition);
+            border: 2px solid rgba(0, 84, 166, 0.3);
+        }
+
+        .event-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+        }
+
+        .event-content {
+            flex: 1;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .team-card {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(145deg, rgba(25, 25, 55, 0.9), rgba(15, 15, 42, 0.95));
+            border-radius: 15px;
+            transition: var(--transition);
+            border: 2px solid rgba(0, 84, 166, 0.3);
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+            border-color: var(--redbull-blue);
+        }
+
+        .team-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid var(--redbull-blue);
+            box-shadow: 0 0 15px rgba(0, 84, 166, 0.5);
+        }
+
+        .team-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--redbull-yellow);
+        }
+
+        .team-card p {
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+
+        footer {
+            background: linear-gradient(to top, rgba(6, 6, 20, 0.95), rgba(15, 15, 42, 0.9));
+            padding: 4rem 2rem 2rem;
+            margin-top: 6rem;
+            text-align: center;
+            position: relative;
+            border-top: 2px solid var(--redbull-blue);
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2.5rem 0;
+        }
+
+        .footer-links a {
+            color: var(--text);
+            text-decoration: none;
+            transition: var(--transition);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 84, 166, 0.3);
+        }
+
+        .footer-links a:hover {
+            color: var(--redbull-yellow);
+            background: rgba(0, 84, 166, 0.1);
+            transform: translateY(-5px);
+            border-color: var(--redbull-blue);
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            font-size: 1rem;
+            opacity: 0.7;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 968px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1.5rem;
+                align-items: center;
+            }
+
+            .event-section {
+                flex-direction: column;
+            }
+
+            .event-image {
+                width: 100%;
+                max-width: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .product-grid, .image-gallery, .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation" id="backgroundAnimation"></div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo"><i class="fas fa-bolt"></i> Red Bull</a>
+            <ul class="nav-links">
+                <li><a href="#" data-page="home">Главная</a></li>
+                <li><a href="#" data-page="history">История</a></li>
+                <li><a href="#" data-page="products">Продукты</a></li>
+                <li><a href="#" data-page="sports">Спорт</a></li>
+                <li><a href="#" data-page="events">События</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home" class="page active">
+            <div class="hero">
+                <h1>Red Bull - Окрыляет!</h1>
+                <p>Энергия, которая поднимает выше облаков. Открой для себя мир Red Bull — бренд, который вдохновляет на достижение невозможного!</p>
+                <a href="#" data-page="history" class="cta-button">Узнать историю</a>
+            </div>
+            
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-battery-full"></i>
+                    <h3>Мгновенная энергия</h3>
+                    <p>Red Bull заряжает энергией и улучшает концентрацию в нужный момент</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Экстрим и спорт</h3>
+                    <p>Поддержка экстремальных видов спорта и талантливых спортсменов</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-music"></i>
+                    <h3>Грандиозные события</h3>
+                    <p>Организация масштабных мероприятий по всему миру</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Мир возможностей с Red Bull</h2>
+                <p>Red Bull — это не просто энергетический напиток, это целая философия жизни, основанная на принципах активности, смелости и стремления к новым достижениям. Бренд стал символом экстремального спорта, музыки и уникальных событий.</p>
+                
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Red_Bull.svg/1280px-Red_Bull.svg.png" alt="Red Bull логотип">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/RedBullCan.jpg/1280px-RedBullCan.jpg" alt="Red Bull банки">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Red_Bull_Air_Race_World_Series_%2848411860217%29.jpg/1280px-Red_Bull_Air_Race_World_Series_%2848411860217%29.jpg" alt="Red Bull события">
+                    </div>
+                </div>
+                
+                <p>С момента своего появления Red Bull кардинально изменил представление об энергетических напитках и создал уникальную культуру, объединяющую миллионы людей по всему миру. От экстремальных спортивных соревнований до масштабных музыкальных фестивалей — Red Bull везде, где есть энергия и страсть.</p>
+                <blockquote>Red Bull окрыляет! — Слоган бренда</blockquote>
+            </div>
+        </section>
+
+        <section id="history" class="page">
+            <h1>История Red Bull</h1>
+            
+            <div class="section">
+                <h2>Основание компании</h2>
+                <p>История Red Bull началась в 1984 году, когда австрийский предприниматель Дитрих Матешиц во время поездки в Таиланд открыл для себя тонизирующий напиток под названием Krating Daeng. Вдохновившись его эффектом, он совместно с тайским партнером Чалерм Йоовидхья основал компанию Red Bull GmbH.</p>
+                
+                <div class="event-section">
+                    <div class="event-content">
+                        <h3>Первые шаги</h3>
+                        <p>Первый завод Red Bull был открыт в Австрии в 1987 году. Напиток быстро завоевал популярность благодаря уникальному маркетингу и ориентации на молодую активную аудиторию. Уже в 1992 году Red Bull вышел на международный рынок, начав с Венгрии.</p>
+                        <p>Ключевым фактором успеха стала революционная маркетинговая стратегия, основанная на спонсорстве экстремальных видов спорта и организации масштабных событий.</p>
+                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Dietrich_Mateschitz_cropped.jpg/800px-Dietrich_Mateschitz_cropped.jpg" alt="Основатель Red Bull" class="event-image">
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Развитие бренда</h2>
+                <p>За decades существования Red Bull прошел впечатляющий путь от одного продукта до глобальной медиа-империи:</p>
+                <ul>
+                    <li><strong>1987:</strong> Запуск производства в Австрии</li>
+                    <li><strong>1992:</strong> Выход на международный рынок</li>
+                    <li><strong>1995:</strong> Создание команды Red Bull в Формуле-1</li>
+                    <li><strong>2000-е:</strong> Расширение продуктовой линейки и выход на новые рынки</li>
+                    <li><strong>2007:</strong> Запуск медиа-холдинга Red Bull Media House</li>
+                    <li><strong>2010-е:</strong> Доминирование в экстремальных видах спорта</li>
+                </ul>
+                
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_Bull_Hangar-7.jpg/1280px-Red_Bull_Hangar-7.jpg" alt="Red Bull Hangar-7">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Red_Bull_Racing_RB18_%2852247883357%29.jpg/1280px-Red_Bull_Racing_RB18_%2852247883357%29.jpg" alt="Red Bull Racing">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="page">
+            <h1>Продукты Red Bull</h1>
+            
+            <div class="section">
+                <h2>Энергетические напитки</h2>
+                <p>Red Bull предлагает разнообразную линейку энергетических напитков, созданных для разных ситуаций и вкусовых предпочтений. Каждый продукт сочетает в себе уникальную формулу и неповторимый вкус.</p>
+                
+                <div class="product-grid">
+                    <div class="product-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/RedBullCan.jpg/800px-RedBullCan.jpg" alt="Red Bull Original" class="product-image">
+                        <h4>Red Bull Original</h4>
+                        <p>Классический энергетический напиток</p>
+                        <p>Освежающий вкус с нотами таурина и кофеина</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/RedBullCan.jpg/800px-RedBullCan.jpg" alt="Red Bull Sugarfree" class="product-image">
+                        <h4>Red Bull Sugarfree</h4>
+                        <p>Без сахара</p>
+                        <p>Тот же заряд энергии без калорий</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/RedBullCan.jpg/800px-RedBullCan.jpg" alt="Red Bull Tropical" class="product-image">
+                        <h4>Red Bull Tropical</h4>
+                        <p>Тропический вкус</p>
+                        <p>Экзотическое сочетание фруктовых нот</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Специальные editions</h2>
+                <p>Помимо основной линейки, Red Bull регулярно выпускает limited edition версии, созданные в collaboration с известными брендами и мероприятиями.</p>
+                
+                <div class="product-grid">
+                    <div class="product-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/RedBullCan.jpg/800px-RedBullCan.jpg" alt="Red Bull Winter Edition" class="product-image">
+                        <h4>Winter Edition</h4>
+                        <p>Сезонный выпуск</p>
+                        <p>Аромат зимних ягод и специй</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/RedBullCan.jpg/800px-RedBullCan.jpg" alt="Red Bull Summer Edition" class="product-image">
+                        <h4>Summer Edition</h4>
+                        <p>Летний выпуск</p>
+                        <p>Освежающий вкус тропических фруктов</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/RedBullCan.jpg/800px-RedBullCan.jpg" alt="Red Bull F1 Edition" class="product-image">
+                        <h4>F1 Edition</h4>
+                        <p>Коллаборация с Формулой-1</p>
+                        <p>Особый дизайн и состав</p>
+                    </div>
+                </div>
+                
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Red_Bull_Hangar-7.jpg/1280px-Red_Bull_Hangar-7.jpg" alt="Red Bull Hangar-7">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/RedBullCan.jpg/1280px-RedBullCan.jpg" alt="Продукты Red Bull">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sports" class="page">
+            <h1>Red Bull в спорте</h1>
+            
+            <div class="section">
+                <h2>Экстремальные виды спорта</h2>
+                <p>Red Bull стал синонимом экстремального спорта, поддерживая самых смелых спортсменов и организуя зрелищные соревнования по всему миру.</p>
+                
+                <div class="event-section">
+                    <div class="event-content">
+                        <h3>Red Bull в воздухе</h3>
+                        <p>От парашютного спорта до воздушной акробатики — Red Bull поддерживает самые зрелищные воздушные дисциплины. Знаменитые соревнования Red Bull Air Race собирают лучших пилотов со всего мира.</p>
+                        <p>Red Bull Stratos — исторический прыжок Феликса Баумгартнера из стратосферы — стал одним из самых впечатляющих достижений в истории экстремального спорта.</p>
+                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Red_Bull_Air_Race_World_Series_%2848411860217%29.jpg/1280px-Red_Bull_Air_Race_World_Series_%2848411860217%29.jpg" alt="Red Bull Air Race" class="event-image">
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Командные виды спорта</h2>
+                <p>Red Bull владеет несколькими профессиональными спортивными командами, которые добиваются выдающихся результатов на международной арене.</p>
+                
+                <div class="team-grid">
+                    <div class="team-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Red_Bull_Racing_RB18_%2852247883357%29.jpg/800px-Red_Bull_Racing_RB18_%2852247883357%29.jpg" alt="Red Bull Racing" class="team-image">
+                        <h4>Red Bull Racing</h4>
+                        <p>Формула-1</p>
+                        <p>Многократные чемпионы конструкторов</p>
+                    </div>
+                    <div class="team-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/FC_Red_Bull_Salzburg_logo.svg/800px-FC_Red_Bull_Salzburg_logo.svg.png" alt="FC Red Bull Salzburg" class="team-image">
+                        <h4>FC Red Bull Salzburg</h4>
+                        <p>Футбол</p>
+                        <p>Австрийская Бундеслига</p>
+                    </div>
+                    <div class="team-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Red_Bull_BC_One_2019.jpg/800px-Red_Bull_BC_One_2019.jpg" alt="Red Bull BC One" class="team-image">
+                        <h4>Red Bull BC One</h4>
+                        <p>Брейк-данс</p>
+                        <p>Крупнейшие мировые соревнования</p>
+                    </div>
+                </div>
+                
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Red_Bull_Rampage_2019.jpg/1280px-Red_Bull_Rampage_2019.jpg" alt="Red Bull Rampage">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Red_Bull_X-Fighters_2011.jpg/1280px-Red_Bull_X-Fighters_2011.jpg" alt="Red Bull X-Fighters">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Red_Bull_Crashed_Ice_2013.jpg/1280px-Red_Bull_Crashed_Ice_2013.jpg" alt="Red Bull Crashed Ice">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="events" class="page">
+            <h1>События Red Bull</h1>
+            
+            <div class="section">
+                <h2>Музыкальные фестивали</h2>
+                <p>Red Bull организует масштабные музыкальные события по всему миру, объединяя лучших артистов и тысячи поклонников музыки.</p>
+                
+                <div class="event-section">
+                    <div class="event-content">
+                        <h3>Red Bull Music Festival</h3>
+                        <p>Ежегодный фестиваль, проходящий в разных городах мира, представляет разнообразные музыкальные жанры — от электронной музыки до хип-хопа и рока.</p>
+                        <p>Фестиваль известен уникальными коллаборациями, экспериментальными проектами и выступлениями как известных, так и emerging артистов.</p>
+                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Red_Bull_Music_Academy_2014.jpg/1280px-Red_Bull_Music_Academy_2014.jpg" alt="Red Bull Music Academy" class="event-image">
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Экстремальные соревнования</h2>
+                <p>Red Bull проводит самые зрелищные спортивные соревнования, которые собирают лучших спортсменов и миллионы зрителей по всему миру.</p>
+                
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Red_Bull_X-Fighters_2011.jpg/1280px-Red_Bull_X-Fighters_2011.jpg" alt="Red Bull X-Fighters">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Red_Bull_Crashed_Ice_2013.jpg/1280px-Red_Bull_Crashed_Ice_2013.jpg" alt="Red Bull Crashed Ice">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Red_Bull_Air_Race_World_Series_%2848411860217%29.jpg/1280px-Red_Bull_Air_Race_World_Series_%2848411860217%29.jpg" alt="Red Bull Air Race">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Red_Bull_Rampage_2019.jpg/1280px-Red_Bull_Rampage_2019.jpg" alt="Red Bull Rampage">
+                    </div>
+                </div>
+                
+                <h3>Легендарные события</h3>
+                <ul>
+                    <li><strong>Red Bull Flugtag:</strong> Соревнования самодельных летательных аппаратов</li>
+                    <li><strong>Red Bull Soapbox Race:</strong> Гонки на самодельных машинах без двигателя</li>
+                    <li><strong>Red Bull Rampage:</strong> Экстремальное фрирайд-состязание по маунтинбайку</li>
+                    <li><strong>Red Bull Illume:</strong> Крупнейший конкурс фотографии экстремального спорта</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="mailto:likaorenburg@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+                <a href="https://t.me/likallk" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
+                <a href="https://vk.com/likallk" target="_blank"><i class="fab fa-vk"></i> ВКонтакте</a>
+            </div>
+            <div class="copyright">
+                <p>© 2025 Red Bull. Все права защищены.</p>
+                <p>likaorenburg@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function createBackgroundAnimation() {
+            const background = document.getElementById('backgroundAnimation');
+            
+            for (let i = 0; i < 15; i++) {
+                const element = document.createElement('div');
+                element.classList.add('floating-can');
+                
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                const animationDelay = Math.random() * 20;
+                const animationDuration = 10 + Math.random() * 15;
+                
+                element.style.left = `${left}%`;
+                element.style.top = `${top}%`;
+                element.style.animationDelay = `${animationDelay}s`;
+                element.style.animationDuration = `${animationDuration}s`;
+                
+                background.appendChild(element);
+            }
+        }
+
+        function setupNavigation() {
+            const navLinks = document.querySelectorAll('.nav-links a');
+            const pages = document.querySelectorAll('.page');
+            
+            function setActivePage(pageId) {
+                pages.forEach(page => page.classList.remove('active'));
+                navLinks.forEach(navLink => navLink.classList.remove('active'));
+                
+                document.getElementById(pageId).classList.add('active');
+                
+                const activeLink = document.querySelector(`.nav-links a[data-page="${pageId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+                
+                window.scrollTo(0, 0);
+            }
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetPage = link.getAttribute('data-page');
+                    setActivePage(targetPage);
+                });
+            });
+            
+            const ctaButton = document.querySelector('.cta-button');
+            if (ctaButton) {
+                ctaButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetPage = ctaButton.getAttribute('data-page');
+                    setActivePage(targetPage);
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createBackgroundAnimation();
+            setupNavigation();
+        });
+    </script>
+</body>
+</html>
